@@ -18,6 +18,9 @@ alle_teiler = teiler(n)
 # Alle Spielsituationen (als Liste von Listen):
 punkte = []
 
+# Alle Übergänge (als Liste von Listen):
+pfeile = []
+
 def mögliche_züge(s):
     """
     Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
@@ -34,6 +37,7 @@ def mögliche_züge(s):
             neue_situation = s.copy()
             neue_situation.append(t)
             möglich.append(neue_situation)
+            pfeile.append([s, neue_situation])
     return möglich
 
 def speichere_züge_als_punkte(situationen):
@@ -50,3 +54,5 @@ speichere_züge_als_punkte([[]])
 print(punkte)
 speichere_züge_als_punkte(punkte.copy())
 print(punkte)
+
+print(pfeile)
