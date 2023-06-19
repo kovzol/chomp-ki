@@ -23,13 +23,18 @@ def mögliche_züge(s):
     Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
     werden ausgerechnet und als eine Liste rückgegeben.
     """
+    erlaubte_züge = alle_teiler.copy()
+    for t in alle_teiler:
+        for z in s:
+            if z%t == 0 and t in erlaubte_züge:
+                erlaubte_züge.remove(t)
     möglich = []
     for t in alle_teiler:
-        if not (t in s):
+        if t in erlaubte_züge:
             neue_situation = s.copy()
             neue_situation.append(t)
             möglich.append(neue_situation)
     return möglich
 
-punkte.append([1]) # [1] ist ein Start des Spieles
+punkte.append([6]) # [6] ist ein Start des Spieles
 print(mögliche_züge(punkte[0]))
