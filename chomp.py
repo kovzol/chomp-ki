@@ -1,4 +1,4 @@
-n = 36
+n = 6
 
 def teiler(k):
     """
@@ -50,15 +50,20 @@ def speichere_züge_als_punkte(situationen):
             if not (z in punkte):
                 punkte.append(z)
 
-def graphviz_output():
-    print("digraph G {")
+def graphviz_output(dateiname):
+    """
+    Erstellt eine GraphViz-Datei mit dateiname, die die Punkte und die Pfeile enthält.
+    """
+    d = open(dateiname, "w")
+    d.write("digraph G {\n")
     for p in pfeile:
-        print(f"\"{p[0]}\" -> \"{p[1]}\";")
-    print("}")
+        d.write(f"\"{p[0]}\" -> \"{p[1]}\";\n")
+    d.write("}\n")
+    d.close()
 
 speichere_züge_als_punkte([[]])
 #print(punkte)
-speichere_züge_als_punkte(punkte.copy())
+speichere_züge_als_punkte(punkte)
 #print(punkte)
 #print(pfeile)
-graphviz_output()
+graphviz_output("chomp.gv")
