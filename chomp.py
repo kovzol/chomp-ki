@@ -50,9 +50,15 @@ def speichere_züge_als_punkte(situationen):
             if not (z in punkte):
                 punkte.append(z)
 
-speichere_züge_als_punkte([[]])
-print(punkte)
-speichere_züge_als_punkte(punkte.copy())
-print(punkte)
+def graphviz_output():
+    print("digraph G {")
+    for p in pfeile:
+        print(f"\"{p[0]}\" -> \"{p[1]}\";")
+    print("}")
 
-print(pfeile)
+speichere_züge_als_punkte([[]])
+#print(punkte)
+speichere_züge_als_punkte(punkte.copy())
+#print(punkte)
+#print(pfeile)
+graphviz_output()
