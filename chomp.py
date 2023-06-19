@@ -36,5 +36,17 @@ def mögliche_züge(s):
             möglich.append(neue_situation)
     return möglich
 
-punkte.append([6]) # [6] ist ein Start des Spieles
-print(mögliche_züge(punkte[0]))
+def speichere_züge_als_punkte(situationen):
+    """
+    Alle situationen werden um einen Zug weitergespielt und als weitere Punkte gespeichert.
+    """
+    for s in situationen:
+        mz = mögliche_züge(s)
+        for z in mz:
+            if not (z in punkte):
+                punkte.append(z)
+
+speichere_züge_als_punkte([[]])
+print(punkte)
+speichere_züge_als_punkte(punkte.copy())
+print(punkte)
