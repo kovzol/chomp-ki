@@ -13,4 +13,23 @@ def teiler(k):
     return t
 
 # Beispiel:
-print(teiler(n))
+alle_teiler = teiler(n)
+
+# Alle Spielsituationen (als Liste von Listen):
+punkte = []
+
+def mögliche_züge(s):
+    """
+    Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
+    werden ausgerechnet und als eine Liste rückgegeben.
+    """
+    möglich = []
+    for t in alle_teiler:
+        if not (t in s):
+            neue_situation = s.copy()
+            neue_situation.append(t)
+            möglich.append(neue_situation)
+    return möglich
+
+punkte.append([1]) # [1] ist ein Start des Spieles
+print(mögliche_züge(punkte[0]))
