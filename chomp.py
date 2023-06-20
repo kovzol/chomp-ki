@@ -97,9 +97,25 @@ def vorteilhafte_situationen_grün():
         if not tuple(s) in farben and grün_möglich:
             farben[tuple(s)] = 'green'
 
+def unvorteilhafte_situationen_rosa():
+    """
+    Färbt alle unvorteilhaften Situationen rosa, laut aktuellem Stand.
+    Die letzten Züge bleiben rot.
+    """
+    for s in punkte:
+        rosa = False
+        for ü in pfeile:
+            if ü[0] == s:
+                nächster_zug = tuple(ü[1])
+                if nächster_zug in farben and farben[nächster_zug] == 'green': # s ist nicht vorteilhaft
+                    rosa = True
+        if not tuple(s) in farben and rosa:
+            farben[tuple(s)] = 'pink'
+
 
 speichere_züge_als_punkte([[]])
 speichere_züge_als_punkte(punkte)
 letzte_züge_rot()
 vorteilhafte_situationen_grün()
+unvorteilhafte_situationen_rosa()
 graphviz_output("chomp.gv")
