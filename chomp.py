@@ -21,6 +21,9 @@ punkte = []
 # Alle Übergänge (als Liste von Listen):
 pfeile = []
 
+# Farben für die Punkte (als Wörterbuch):
+farben = dict()
+
 def mögliche_züge(s):
     """
     Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
@@ -61,9 +64,15 @@ def graphviz_output(dateiname):
     d.write("}\n")
     d.close()
 
+def letzte_züge_rot():
+    letzte_züge = punkte.copy()
+    for s in punkte:
+        for ü in pfeile:
+            if ü[0] == s and s in letzte_züge:
+                letzte_züge.remove(s)
+    print("Letzte Züge:", letzte_züge)
+
 speichere_züge_als_punkte([[]])
-#print(punkte)
 speichere_züge_als_punkte(punkte)
-#print(punkte)
-#print(pfeile)
 graphviz_output("chomp.gv")
+letzte_züge_rot()
