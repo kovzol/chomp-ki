@@ -12,7 +12,6 @@ def teiler(k):
     t.append(k)
     return t
 
-# Beispiel:
 alle_teiler = teiler(n)
 
 # Alle Spielsituationen (als Liste von Listen):
