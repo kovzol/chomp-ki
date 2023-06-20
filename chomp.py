@@ -69,6 +69,9 @@ def graphviz_output(dateiname):
     d.close()
 
 def letzte_züge_rot():
+    """
+    Färbt alle letzten Züge rot.
+    """
     letzte_züge = punkte.copy()
     for s in punkte:
         for ü in pfeile:
