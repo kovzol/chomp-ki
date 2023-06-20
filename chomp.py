@@ -80,7 +80,26 @@ def letzte_züge_rot():
     for z in letzte_züge:
         farben[tuple(z)] = 'red'
 
+def vorteilhafte_situationen_grün():
+    """
+    Färbt alle vorteilhaften Situationen grün, laut aktuellem Stand.
+    """
+    for s in punkte:
+        grün_möglich = True
+        for ü in pfeile:
+            if ü[0] == s:
+                nächster_zug = tuple(ü[1])
+                if not (nächster_zug in farben):
+                    grün_möglich = False # Es gibt keine Information über den nächsten Zug
+                else:
+                    if farben[nächster_zug] == 'green': # s kann nicht vorteilhaft sein
+                        grün_möglich = False
+        if not tuple(s) in farben and grün_möglich:
+            farben[tuple(s)] = 'green'
+
+
 speichere_züge_als_punkte([[]])
 speichere_züge_als_punkte(punkte)
 letzte_züge_rot()
+vorteilhafte_situationen_grün()
 graphviz_output("chomp.gv")
