@@ -1,4 +1,4 @@
-n = 6
+n = 36
 
 def teiler(k):
     """
