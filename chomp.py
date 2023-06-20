@@ -112,10 +112,20 @@ def unvorteilhafte_situationen_rosa():
         if not tuple(s) in farben and rosa:
             farben[tuple(s)] = 'pink'
 
+def alle_situationen_überprüft():
+    """
+    Entscheidet ob alle Situationen schon überprüft (gefärbt) wurden.
+    """
+    fertig = True
+    for s in punkte:
+        if not(tuple(s)) in farben:
+            return False
+    return True
 
 speichere_züge_als_punkte([[]])
 speichere_züge_als_punkte(punkte)
 letzte_züge_rot()
-vorteilhafte_situationen_grün()
-unvorteilhafte_situationen_rosa()
+while not alle_situationen_überprüft():
+   vorteilhafte_situationen_grün()
+   unvorteilhafte_situationen_rosa()
 graphviz_output("chomp.gv")
