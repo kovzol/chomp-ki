@@ -61,6 +61,10 @@ def graphviz_output(dateiname):
     d.write("digraph G {\n")
     for p in pfeile:
         d.write(f"\"{p[0]}\" -> \"{p[1]}\";\n")
+    for s in punkte:
+        if tuple(s) in farben:
+            farbe = farben[tuple(s)]
+            d.write(f"\"{s}\" [color = {farbe}; style = filled];\n")
     d.write("}\n")
     d.close()
 
@@ -70,9 +74,10 @@ def letzte_züge_rot():
         for ü in pfeile:
             if ü[0] == s and s in letzte_züge:
                 letzte_züge.remove(s)
-    print("Letzte Züge:", letzte_züge)
+    for z in letzte_züge:
+        farben[tuple(z)] = 'red'
 
 speichere_züge_als_punkte([[]])
 speichere_züge_als_punkte(punkte)
-graphviz_output("chomp.gv")
 letzte_züge_rot()
+graphviz_output("chomp.gv")
