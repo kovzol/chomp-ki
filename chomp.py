@@ -1,5 +1,43 @@
 n = 36
 
+"""
+Erklärung des Programms (Die Erklärung wurde mithilfe von KI generiert):
+Das Programm definiert mehrere Funktionen und Variablen, um das Spiel zu
+simulieren und zu analysieren:
+1. Die Funktion teiler(k) berechnet alle positiven Teiler der ganzen Zahl k und gibt
+sie als Liste zurück.
+2. Die Variable alle_teiler speichert die Liste der Teiler einer vorgegebenen Zahl n.
+3. Die Variablen punkte, pfeile und farben sind leere Listen bzw. ein Wörterbuch, die
+verwendet werden, um Spielzustände ("Spielsituationen"), Übergänge (Züge) und Farben für
+Visualisierungszwecke zu speichern.
+4. Die Funktion mögliche_züge(s) berechnet alle möglichen Züge (Spielzustände),
+die vom aktuellen Spielzustand s aus erreichbar sind, und gibt sie als Liste
+zurück.
+5. Die Funktion speichere_züge_als_punkte(situationen) erzeugt alle möglichen
+Spielzustände, die sich aus einem Zug weiter von jedem Zustand in der Liste
+situationen ergeben, und speichert sie als neue Spielzustände in der Liste
+punkte.
+6. Die Funktion graphviz_output(dateiname) erstellt eine GraphViz-Datei (mit dem
+gegebenen dateiname), die die Spielzustände und Übergänge (Züge) mithilfe
+einer grafischen Darstellung repräsentiert.
+7. Die Funktion letzte_situationen_rot() markiert alle letzten Züge (Zustände) als rot.
+8. Die Funktion vorteilhafte_situationen_grün() markiert vorteilhafte Spielzustände
+(Zustände, die zu einer Gewinnsituation führen) als grün.
+9. Die Funktion unvorteilhafte_situationen_rosa() markiert nachteilige Spielzustände
+(Zustände, die zu einer Verlierersituation führen) als rosa.
+10. Die Funktion alle_situationen_überprüft() überprüft, ob alle Spielzustände mit einer
+Farbe markiert wurden.
+Das Programm initialisiert das Spiel, indem es den anfänglichen leeren Spielzustand
+([]) in der Liste punkte speichert und dann alle möglichen Spielzustände, die vom
+anfänglichen Zustand aus erreichbar sind, mithilfe der Funktion
+speichere_züge_als_punkte() generiert.
+Anschließend markiert das Programm die letzten Züge als rot mit Hilfe der Funktion
+letzte_situationen_rot(). Danach markiert es iterativ vorteilhafte Spielzustände als grün und
+nachteilige Spielzustände als rosa, bis alle Spielzustände markiert sind, indem es die
+Funktionen vorteilhafte_situationen_grün() und unvorteilhafte_situationen_rosa() Funktionen
+durchführt.
+"""
+
 def teiler(k):
     """
     Diese Funktion berechnet alle positiven Teiler der ganzen Zahl k.
@@ -26,7 +64,8 @@ farben = dict()
 def mögliche_züge(s):
     """
     Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
-    werden ausgerechnet und als eine Liste rückgegeben.
+    werden ausgerechnet. Das Ergebnis ist eine Liste aller Spielzüge,
+    die aus der Spielsituation s direkt erreichbar sind.
     """
     erlaubte_züge = alle_teiler.copy()
     for t in alle_teiler:
