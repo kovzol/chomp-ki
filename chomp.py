@@ -63,8 +63,8 @@ farben = dict()
 
 def mögliche_züge(s):
     """
-    Alle Spielsituationen, die aus der Spielsituation s direkt erreichbar sind,
-    werden ausgerechnet. Das Ergebnis ist eine Liste aller Spielzüge,
+    Alle Spielsituationen, die von der Spielsituation s direkt erreichbar sind,
+    werden berechnet. Das Ergebnis ist eine Liste aller Spielzüge,
     die aus der Spielsituation s direkt erreichbar sind.
     """
     erlaubte_züge = alle_teiler.copy()
@@ -82,7 +82,7 @@ def mögliche_züge(s):
 
 def speichere_züge_als_punkte(situationen):
     """
-    Alle situationen werden um einen Zug weitergespielt und als weitere Punkte gespeichert.
+    Alle situationen werden einen weiteren Zug gespielt und als zusätzliche Punkte gespeichert.
     """
     for s in situationen:
         mz = mögliche_züge(s)
@@ -91,7 +91,7 @@ def speichere_züge_als_punkte(situationen):
 
 def graphviz_output(dateiname):
     """
-    Erstellt eine GraphViz-Datei mit dateiname, die die Punkte und die Pfeile enthält.
+    Erstellt eine GraphViz-Datei mit dateiname, welche die Punkte und die Pfeile enthält.
     """
     d = open(dateiname, "w")
     d.write("digraph G {\n")
@@ -118,7 +118,7 @@ def letzte_situationen_rot():
 
 def vorteilhafte_situationen_grün():
     """
-    Färbt alle vorteilhaften Situationen grün, laut aktuellem Stand.
+    Färbt alle vorteilhaften Situationen grün, gemäß dem aktuellen Stand.
     """
     for s in punkte:
         grün_möglich = True
@@ -126,16 +126,16 @@ def vorteilhafte_situationen_grün():
             if ü[0] == s:
                 nächste_situation = tuple(ü[1])
                 if not (nächste_situation in farben):
-                    grün_möglich = False # Es gibt keine Information über den nächsten Zug
+                    grün_möglich = False # Es gibt keine Information über den nächsten Zug.
                 else:
-                    if farben[nächste_situation] == 'green': # s kann nicht vorteilhaft sein
+                    if farben[nächste_situation] == 'green': # s kann nicht vorteilhaft sein.
                         grün_möglich = False
         if not tuple(s) in farben and grün_möglich:
             farben[tuple(s)] = 'green'
 
 def unvorteilhafte_situationen_rosa():
     """
-    Färbt alle unvorteilhaften Situationen rosa, laut aktuellem Stand.
+    Färbt alle unvorteilhaften Situationen rosa gemäß dem aktuellen Stand.
     Die letzten Züge bleiben rot.
     """
     for s in punkte:
@@ -143,14 +143,14 @@ def unvorteilhafte_situationen_rosa():
         for ü in pfeile:
             if ü[0] == s:
                 nächste_situation = tuple(ü[1])
-                if nächste_situation in farben and farben[nächste_situation] == 'green': # s ist nicht vorteilhaft
+                if nächste_situation in farben and farben[nächste_situation] == 'green': # s ist nicht vorteilhaft.
                     rosa = True
         if not tuple(s) in farben and rosa:
             farben[tuple(s)] = 'pink'
 
 def alle_situationen_überprüft():
     """
-    Entscheidet ob alle Situationen schon überprüft (gefärbt) wurden.
+    Entscheidet, ob alle Situationen schon überprüft (gefärbt) wurden.
     """
     for s in punkte:
         if not(tuple(s)) in farben:
