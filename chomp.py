@@ -2,6 +2,8 @@
 
 n = 100
 
+import datetime
+
 """
 Erklärung des Programms (Die Erklärung wurde mithilfe von KI generiert):
 Das Programm definiert mehrere Funktionen und Variablen, um das Spiel zu
@@ -39,6 +41,8 @@ nachteilige Spielzustände als rosa, bis alle Spielzustände markiert sind, inde
 Funktionen vorteilhafte_situationen_grün() und unvorteilhafte_situationen_rosa() Funktionen
 durchführt.
 """
+
+print(datetime.datetime.now())
 
 def teiler(k):
     """
@@ -187,12 +191,12 @@ while not alle_situationen_überprüft():
 
 # Hier beginnt das Spiel!
 
-N = n
+print(datetime.datetime.now())
 
 erlaubte_Zahlen = []
 
-for T in range(1, N+1):
-    if N % T == 0:
+for T in range(1, n+1):
+    if n % T == 0:
         # N ist ein Vielfaches von T:
         erlaubte_Zahlen.append(T)
 
@@ -253,7 +257,7 @@ while True:
             entferne_Zug(Zug)
         else:
             print("Dieser Zug ist nicht erlaubt!")
-    if Zug == 100: # oder, len(erlaubte_Zahlen) == 0
+    if Zug == n: # oder, len(erlaubte_Zahlen) == 0
         print(f"Du Versager!")
         break
 
@@ -264,7 +268,7 @@ while True:
     print(f"Johnny nimmt {Zug}.")
     spielablauf.append(Zug)
     entferne_Zug(Zug)
-    if Zug == 100: # oder, len(erlaubte_Zahlen) == 0
+    if Zug == n: # oder, len(erlaubte_Zahlen) == 0
         print(f"Ich Versager! Johnny ist traurig.")
         break
 
