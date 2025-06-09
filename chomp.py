@@ -1,4 +1,4 @@
-n = 36
+n = 100
 
 """
 Erklärung des Programms (Die Erklärung wurde mithilfe von KI generiert):
@@ -104,6 +104,23 @@ def graphviz_output(dateiname):
     d.write("}\n")
     d.close()
 
+def graphviz_output_start(dateiname, start):
+    """
+    Erstellt eine GraphViz-Datei mit dateiname, welche die Punkte und die Pfeile enthält.
+    Nur solche Wege werden gezeigt, die mit start beginnen.
+    """
+    d = open(dateiname, "w")
+    d.write("digraph G {\n")
+    for p in pfeile:
+        if len(p[0]) > 0 and p[0][0] == start:
+            d.write(f"\"{p[0]}\" -> \"{p[1]}\";\n")
+    for s in punkte:
+        if len(s) > 0 and s[0] == start and tuple(s) in farben:
+            farbe = farben[tuple(s)]
+            d.write(f"\"{s}\" [color = {farbe}; style = filled];\n")
+    d.write("}\n")
+    d.close()
+
 def letzte_situationen_rot():
     """
     Färbt alle letzten Situationen rot.
@@ -164,3 +181,4 @@ while not alle_situationen_überprüft():
     vorteilhafte_situationen_grün()
     unvorteilhafte_situationen_rosa()
 graphviz_output("chomp.gv")
+graphviz_output_start("chomp-10.gv", 10)
