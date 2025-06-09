@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 n = 100
 
 """
@@ -189,7 +191,6 @@ N = n
 
 erlaubte_Zahlen = []
 
-
 for T in range(1, N+1):
     if N % T == 0:
         # N ist ein Vielfaches von T:
@@ -204,10 +205,14 @@ def Johnnys_Zug():
     Der gewählte Zug wird in "return" gegeben.
     """
 
-    # Strategie: Wenn die Zahlen 10, 4, 20, 25, 50 noch nicht ausgewählt sind,
-    # dann sollte 10 ausgewählt werden.
-    if 10 in erlaubte_Zahlen and 4 in erlaubte_Zahlen and 20 in erlaubte_Zahlen and 25 in erlaubte_Zahlen and 50 in erlaubte_Zahlen:
-        return(10)
+    for z in erlaubte_Zahlen:
+        probe = spielablauf.copy()
+        probe.append(z)
+        f = farben[tuple(probe)]
+        print(f"Probe: {probe} = {f}")
+        if f == "green":
+            return z
+    
     # Eine ganz einfache Strategie: Johnny wählt die kleinste Zahl.
     if len(erlaubte_Zahlen) > 0:
         return erlaubte_Zahlen[0]
