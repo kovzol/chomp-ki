@@ -189,10 +189,13 @@ N = n
 
 erlaubte_Zahlen = []
 
+
 for T in range(1, N+1):
     if N % T == 0:
         # N ist ein Vielfaches von T:
         erlaubte_Zahlen.append(T)
+
+spielablauf = []
 
 def Johnnys_Zug():
     """
@@ -227,6 +230,8 @@ if b == "ja" or b == "JA" or b == "Ja" or b == "j" or b == "J":
 else:
     Zug = Johnnys_Zug()
     print(f"Johnny beginnt mit {Zug}.")
+    spielablauf.append(Zug)
+    print(f"Bisheriger Spielablauf: {spielablauf}")
     entferne_Zug(Zug)
 
 while True:
@@ -239,6 +244,7 @@ while True:
         Zug = int(input(f"Dein Zug? "))
         if Zug in erlaubte_Zahlen:
             erlaubt = True
+            spielablauf.append(Zug)
             entferne_Zug(Zug)
         else:
             print("Dieser Zug ist nicht erlaubt!")
@@ -246,10 +252,15 @@ while True:
         print(f"Du Versager!")
         break
 
+    print(f"Bisheriger Spielablauf: {spielablauf}")
+
     # Jetzt is Johnny dran!
     Zug = Johnnys_Zug()
     print(f"Johnny nimmt {Zug}.")
+    spielablauf.append(Zug)
     entferne_Zug(Zug)
     if Zug == 100: # oder, len(erlaubte_Zahlen) == 0
         print(f"Ich Versager! Johnny ist traurig.")
         break
+
+    print(f"Bisheriger Spielablauf: {spielablauf}")
