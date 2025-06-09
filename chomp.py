@@ -180,5 +180,76 @@ letzte_situationen_rot()
 while not alle_situationen_überprüft():
     vorteilhafte_situationen_grün()
     unvorteilhafte_situationen_rosa()
-graphviz_output("chomp.gv")
-graphviz_output_start("chomp-10.gv", 10)
+# graphviz_output("chomp.gv")
+# graphviz_output_start("chomp-10.gv", 10)
+
+# Hier beginnt das Spiel!
+
+N = n
+
+erlaubte_Zahlen = []
+
+for T in range(1, N+1):
+    if N % T == 0:
+        # N ist ein Vielfaches von T:
+        erlaubte_Zahlen.append(T)
+
+def Johnnys_Zug():
+    """
+    (Das ist ein Kommentar.)
+    Diese Funktion berechnet, welcher Zug von Johnny gewählt wird.
+    Der gewählte Zug wird in "return" gegeben.
+    """
+
+    # Strategie: Wenn die Zahlen 10, 4, 20, 25, 50 noch nicht ausgewählt sind,
+    # dann sollte 10 ausgewählt werden.
+    if 10 in erlaubte_Zahlen and 4 in erlaubte_Zahlen and 20 in erlaubte_Zahlen and 25 in erlaubte_Zahlen and 50 in erlaubte_Zahlen:
+        return(10)
+    # Eine ganz einfache Strategie: Johnny wählt die kleinste Zahl.
+    if len(erlaubte_Zahlen) > 0:
+        return erlaubte_Zahlen[0]
+    else:
+        print("Sorry, Johnny kann keinen Zug wählen.")
+
+def entferne_Zug(Zug):
+    # Nicht nur Zug, sondern auch alle Teiler von ihm, sollten entfernt werden!
+    for T in range(1, Zug+1):
+        if Zug % T == 0 and T in erlaubte_Zahlen:
+            # Zug ist ein Vielfaches von T:
+            erlaubte_Zahlen.remove(T)
+
+print("Hallo! Ich heiße Johnny, ein Programm für das Teilerspiel mit KI.")
+print("Die erlaubten Zahlen:", erlaubte_Zahlen)
+
+b = input("Möchtest du das Spiel beginnen? ")
+if b == "ja" or b == "JA" or b == "Ja" or b == "j" or b == "J":
+    print("Okay, du kannst beginnen!")
+else:
+    Zug = Johnnys_Zug()
+    print(f"Johnny beginnt mit {Zug}.")
+    entferne_Zug(Zug)
+
+while True:
+
+    print("Die erlaubten Zahlen:", erlaubte_Zahlen)
+
+    erlaubt = False
+
+    while not erlaubt:
+        Zug = int(input(f"Dein Zug? "))
+        if Zug in erlaubte_Zahlen:
+            erlaubt = True
+            entferne_Zug(Zug)
+        else:
+            print("Dieser Zug ist nicht erlaubt!")
+    if Zug == 100: # oder, len(erlaubte_Zahlen) == 0
+        print(f"Du Versager!")
+        break
+
+    # Jetzt is Johnny dran!
+    Zug = Johnnys_Zug()
+    print(f"Johnny nimmt {Zug}.")
+    entferne_Zug(Zug)
+    if Zug == 100: # oder, len(erlaubte_Zahlen) == 0
+        print(f"Ich Versager! Johnny ist traurig.")
+        break
